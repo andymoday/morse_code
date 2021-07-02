@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
@@ -61,28 +61,34 @@ morse_dict = {'a': '⚫➖',
               ' ': '  '}
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def main():
-    # Get Input Text From User
-    text_to_convert = input("Please Enter The Text You Wish To Convert: ")
+    if request.method == "POST":
+        # Get Input Text From User
+        # text_to_convert = input("Please Enter The Text You Wish To Convert: ")
+        text_to_convert = request.form.get('input_text')
 
-    # Validate Input
-    # Changing Case For Dictionary Lookup
-    text_to_convert = text_to_convert.lower()
+        # Validate Input
+        # Changing Case For Dictionary Lookup
+        text_to_convert = text_to_convert.lower()
 
-    # Create Empty Translation String
-    translation = ''
+        # Create Empty Translation String
+        translation = ''
 
-    try:
-        # Look up each letter in Morse Code Dictionary and add to Translation String
-        for letter in text_to_convert:
-            translation += f"{morse_dict[letter]} "
+        try:
+            # Look up each letter in Morse Code Dictionary and add to Translation String
+            for letter in text_to_convert:
+                translation += f"{morse_dict[letter]} "
 
-        # Return Morse Code Translation to User
-        print(translation)
+            # Return Morse Code Translation to User
+            return render_template('index.html', msg=translation)
+            # print(translation)
 
-    except KeyError:
-        print('One or more letters are not translatable. Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
+        except KeyError:
+            return render_template('index.html',
+                                   msg='One or more letters are not translatable. '
+                                       'Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
