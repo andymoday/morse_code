@@ -8,5 +8,8 @@
 {% endblock %}
 
 {% block content %}
-
+<form action="{{ url_for('main') }}", method="post">
+    <input type="text" name="input_text", placeholder="Enter text to translate: ">
+    <input type="submit" name="Translate">
+</form>
 {% endblock %}
