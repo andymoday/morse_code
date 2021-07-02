@@ -1,3 +1,9 @@
+from flask import Flask
+from flask_bootstrap import Bootstrap
+
+app = Flask(__name__)
+Bootstrap(app)
+
 morse_dict = {'a': '⚫➖',
               'b': '➖⚫⚫⚫',
               'c': '➖⚫➖⚫',
@@ -54,25 +60,30 @@ morse_dict = {'a': '⚫➖',
               '9': '➖➖➖➖⚫',
               ' ': '  '}
 
-# Get Input Text From User
-text_to_convert = input("Please Enter The Text You Wish To Convert: ")
 
-# Validate Input
-# Changing Case For Dictionary Lookup
-text_to_convert = text_to_convert.lower()
+@app.route('/')
+def main():
+    # Get Input Text From User
+    text_to_convert = input("Please Enter The Text You Wish To Convert: ")
 
-# Create Empty Translation String
-translation = ''
+    # Validate Input
+    # Changing Case For Dictionary Lookup
+    text_to_convert = text_to_convert.lower()
 
-try:
-    # Look up each letter in Morse Code Dictionary and add to Translation String
-    for letter in text_to_convert:
-        translation += f"{morse_dict[letter]} "
+    # Create Empty Translation String
+    translation = ''
 
-    # Return Morse Code Translation to User
-    print(translation)
+    try:
+        # Look up each letter in Morse Code Dictionary and add to Translation String
+        for letter in text_to_convert:
+            translation += f"{morse_dict[letter]} "
 
-except KeyError:
-    print('One or more letters are not translatable. Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
+        # Return Morse Code Translation to User
+        print(translation)
+
+    except KeyError:
+        print('One or more letters are not translatable. Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
 
 
+if __name__ == '__main__':
+    app.run(debug=True)
