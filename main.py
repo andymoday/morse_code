@@ -58,8 +58,7 @@ morse_dict = {'a': '⚫➖',
               '6': '➖⚫⚫⚫⚫',
               '7': '➖➖⚫⚫⚫',
               '8': '➖➖➖⚫⚫',
-              '9': '➖➖➖➖⚫',
-              ' ': '  /  '}
+              '9': '➖➖➖➖⚫'}
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -77,7 +76,10 @@ def main():
         try:
             # Look up each letter in Morse Code Dictionary and add to Translation String
             for letter in text:
-                translation += f"{morse_dict[letter]} "
+                if letter == " ":
+                    translation += '  /  '
+                else:
+                    translation += f"[{morse_dict[letter]}]"
 
             # Return Morse Code Translation to User
             return render_template('index.html', msg=translation, text=text_to_convert)
