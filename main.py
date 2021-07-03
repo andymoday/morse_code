@@ -66,7 +66,7 @@ def main():
     if request.method == "POST":
         # Get Input Text From User
         # text_to_convert = input("Please Enter The Text You Wish To Convert: ")
-        text_to_convert = request.form.get('input_text')
+        text_to_convert = request.form.get('input_text').replace("\r", "").replace("\n", " ")
 
         # Validate Input
         # Changing Case For Dictionary Lookup
