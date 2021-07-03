@@ -1,4 +1,4 @@
-##Morse Code Translator
+## Morse Code Translator
 
 Takes input from user (string) and converts into Morse Code
 
@@ -11,5 +11,5 @@ Acceptable characters:
     <li>[ . , ? ' ! / ( ) & : ; = + - _ " $ @ ]</li> 
 </ul>
 
-###Source for data: 
+### Source for data: 
 https://morsecode.world/international/morse.html
