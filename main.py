@@ -77,7 +77,7 @@ def main():
         try:
             # Look up each letter in Morse Code Dictionary and add to Translation String
             for letter in text:
-                translation += f"{morse_dict[letter]}  "
+                translation += f"{morse_dict[letter]} "
 
             # Return Morse Code Translation to User
             return render_template('index.html', msg=translation, text=text_to_convert)

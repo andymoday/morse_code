@@ -1,8 +1,9 @@
 /*****TAG SELECTORS*****/
 
 .jumbotron{
-    margin: 1% auto;
+    margin: 5% auto;
     width: 700px;
+    opacity: 98%;
 }
 h1 {
     margin: 0 auto 4%;
@@ -17,9 +18,14 @@ h4 {
     margin:auto;
     width: 95%;
 }
+p {
+    margin: auto;
+    width: 95%;
+}
 
 body {
     background-image: url('marconi.jpg');
+    font-family: 'Quicksand', sans-serif;
 }
 
 /****CLASS SELECTORS****/
