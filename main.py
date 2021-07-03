@@ -70,18 +70,18 @@ def main():
 
         # Validate Input
         # Changing Case For Dictionary Lookup
-        text_to_convert = text_to_convert.lower()
+        text = text_to_convert.lower()
 
         # Create Empty Translation String
         translation = ''
 
         try:
             # Look up each letter in Morse Code Dictionary and add to Translation String
-            for letter in text_to_convert:
+            for letter in text:
                 translation += f"{morse_dict[letter]}  "
 
             # Return Morse Code Translation to User
-            return render_template('index.html', msg=translation)
+            return render_template('index.html', msg=translation, text=text_to_convert)
             # print(translation)
 
         except KeyError:
