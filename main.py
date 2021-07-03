@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 Bootstrap(app)
 
+# set up dictionary of morse characters
 morse_dict = {'a': '⚫➖',
               'b': '➖⚫⚫⚫',
               'c': '➖⚫➖⚫',
@@ -65,10 +66,8 @@ morse_dict = {'a': '⚫➖',
 def main():
     if request.method == "POST":
         # Get Input Text From User
-        # text_to_convert = input("Please Enter The Text You Wish To Convert: ")
         text_to_convert = request.form.get('input_text').replace("\r", "").replace("\n", " ")
 
-        # Validate Input
         # Changing Case For Dictionary Lookup
         text = text_to_convert.lower()
 
@@ -82,12 +81,12 @@ def main():
 
             # Return Morse Code Translation to User
             return render_template('index.html', msg=translation, text=text_to_convert)
-            # print(translation)
 
         except KeyError:
             return render_template('index.html',
                                    msg='One or more letters are not translatable. '
                                        'Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
+
     return render_template('index.html')
 
 
