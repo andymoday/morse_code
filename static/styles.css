@@ -1,3 +1,29 @@
-.container-fluid{
-    width: 500px;
+/*****TAG SELECTORS*****/
+
+.jumbotron{
+    margin: 1% auto;
+    width: 700px;
+}
+h1 {
+    margin: 2% auto 4%;
+}
+
+h2 {
+    margin: 2% auto 4%;
+}
+h4 {
+    background: #fff;
+    line-height: 200%;
+    margin:auto;
+    width: 95%;
+}
+
+body {
+    background-image: url('marconi.jpg');
+}
+
+/****CLASS SELECTORS****/
+
+.btn {
+    margin: 4% auto 2%;
 }
