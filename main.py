@@ -73,15 +73,24 @@ def main():
 
         # Create Empty Translation String
         translation = ''
-
+        morse_message_for_audio = []
         try:
             # Look up each letter in Morse Code Dictionary and add to Translation String
-            for letter in text:
+            for i in range(len(text)):
+                letter = text[i]
                 if letter == " ":
                     translation += '  /  '
+                    morse_message_for_audio.append(3)
                 else:
                     translation += f"[{morse_dict[letter]}]"
-
+                    for j in range(len(morse_dict[letter])):
+                        if morse_dict[letter][j] == '➖':
+                            morse_message_for_audio.append(0)
+                        elif morse_dict[letter][j] == '⚫':
+                            morse_message_for_audio.append(1)
+                        if i < (len(text) - 1) and j == (len(morse_dict[letter]) - 1) and text[i + 1] != " ":
+                            morse_message_for_audio.append(2)
+                make_morse(morse_message_for_audio)
             # Return Morse Code Translation to User
             return render_template('index.html', msg=translation, text=text_to_convert)
 
