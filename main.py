@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from morse import make_morse
+import time
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -90,9 +91,11 @@ def main():
                             morse_message_for_audio.append(1)
                         if i < (len(text) - 1) and j == (len(morse_dict[letter]) - 1) and text[i + 1] != " ":
                             morse_message_for_audio.append(2)
-                make_morse(morse_message_for_audio)
+
+            wavfile = make_morse(morse_message_for_audio)
+
             # Return Morse Code Translation to User
-            return render_template('index.html', msg=translation, text=text_to_convert)
+            return render_template('index.html', msg=translation, text=text_to_convert, wav=wavfile)
 
         except KeyError:
             return render_template('index.html',

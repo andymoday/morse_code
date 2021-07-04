@@ -1,5 +1,7 @@
 import numpy as np
 import wavio
+import os
+from datetime import datetime
 
 frequency = 440  # Our played note will be 440 Hz
 fs = 44100  # 44100 samples per second
@@ -7,13 +9,19 @@ dit_duration = int(44100 / 10 * 3)
 dit_silence = np.zeros(dit_duration)
 char_silence = np.zeros(dit_duration * 3)
 word_silence = np.zeros(dit_duration * 7)
-output_audio = []
-
-# message = [1, 1, 1, 2, 0, 0, 0, 2, 1, 1, 1, 3, 1, 1, 1, 2, 0, 0, 0, 2, 1, 1, 1]
 
 
 def make_morse(message):
-    global output_audio
+    output_audio = []
+
+    directory = "./static"
+
+    files_in_directory = os.listdir(directory)
+    filtered_files = [file for file in files_in_directory if file.endswith(".wav")]
+    for file in filtered_files:
+        path_to_file = os.path.join(directory, file)
+        os.remove(path_to_file)
+
     for i in range(len(message)):
 
         if message[i] == 2:
@@ -45,4 +53,9 @@ def make_morse(message):
     # Convert to 16-bit data
     output_audio = output_audio.astype(np.int16)
 
-    wavio.write("morse.wav", output_audio, fs, sampwidth=2)
+    timestamp = str(datetime.now()).replace(":", "") .replace(" ", "").replace(".", "")
+    filename = f"static/morse{timestamp}.wav"
+
+    wavio.write(filename, output_audio, fs, sampwidth=2)
+
+    return filename
