@@ -22,15 +22,17 @@
     <div>
         {% if err: %}
 
-        <h4>{{ err }}</h4>
+            <h4>{{ err }}</h4>
 
         {% elif msg: %}
 
-        <p><i>"{{ text }}"</i></p>
-        <audio id="audio" controls autoplay="False">
-          <source id="wav_src" src="{{ wav }}" preload="auto" type="audio/wav">
-        Your browser does not support the audio element.
-        </audio>
+            <p><i>"{{ text }}"</i></p>
+
+            <audio id="audio" controls>
+              <source id="wav_src" src="{{ wav }}" preload="auto" type="audio/wav">
+            Your browser does not support the audio element.
+            </audio>
+
         <h4>{{ msg }}</h4>
 
         {% endif %}

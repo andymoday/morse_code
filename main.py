@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from morse import make_morse
-import time
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -80,18 +79,26 @@ def main():
             for i in range(len(text)):
                 letter = text[i]
                 if letter == " ":
+                    # add space to translation to be displayed
                     translation += '  /  '
+                    # add word space to the array being passed into the morse_maker function
+                    # (0 is dah, 1 is dit, 2 is character spacing, 3 is word spacing)
                     morse_message_for_audio.append(3)
                 else:
+                    # add characters to translation string
                     translation += f"[{morse_dict[letter]}]"
+
+                    # add numbers to morse maker array
                     for j in range(len(morse_dict[letter])):
                         if morse_dict[letter][j] == '➖':
                             morse_message_for_audio.append(0)
                         elif morse_dict[letter][j] == '⚫':
                             morse_message_for_audio.append(1)
+                        # stops space after last character and before spaces but adds it between individual dits and dahs
                         if i < (len(text) - 1) and j == (len(morse_dict[letter]) - 1) and text[i + 1] != " ":
                             morse_message_for_audio.append(2)
 
+            # wavfile name passed to html audio src attribute
             wavfile = make_morse(morse_message_for_audio)
 
             # Return Morse Code Translation to User
