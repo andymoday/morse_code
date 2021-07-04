@@ -99,9 +99,11 @@ def main():
 
         except KeyError:
             return render_template('index.html',
-                                   msg='One or more letters are not translatable. '
+                                   err='One or more letters are not translatable. '
                                        'Please enter A-Z, a-z, 0-9 [.,?\'!/()&:;=+-_\"$@]')
-
+        except AttributeError:
+            return render_template('index.html',
+                                   err='Please enter some text')
     return render_template('index.html')
 
 
