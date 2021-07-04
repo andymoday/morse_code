@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from morse import make_morse
 
 app = Flask(__name__)
 Bootstrap(app)
